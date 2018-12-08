@@ -1,0 +1,29 @@
+
+
+
+header {
+    display: flex;
+    align-items: flex-end;
+    /* padding: 2em 4em; */
+}
+
+form {
+    margin-left: auto;   
+}
+
+h3 {
+    margin-left: 2em;
+    margin-bottom: 1em;
+}
+
+.person, .act-desc {
+    padding: 0;
+    margin-left: 8em;
+    /* margin: 0 0 0 3em; */
+}
+
+
+a.btn {
+    height:35px;
+    margin-left: auto;
+}

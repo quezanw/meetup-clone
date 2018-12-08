@@ -1,0 +1,92 @@
+
+<link rel="stylesheet" href="~/css/nav.css">
+<link rel="stylesheet" href="~/css/dash.css">
+<div class="container-fluid">
+    <nav>
+        <h2>Dojo Activity Center</h2>
+        <p class="name">Welcome @ViewBag.user.FirstName!</p>
+        <a class="logout" href="/">log out</a>
+    </nav>
+    <hr>
+    <table class="table tabel-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Activity</th>
+                <th>Date and Time</th>
+                <th>Duration</th>
+                <th>Event Coordinator</th>
+                <th># of Participants</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var activity in @ViewBag.activities)
+            {
+                string date = @activity.Date.ToString("MM/dd");
+                DateTime dateTime = DateTime.MinValue.Add(@activity.Time);
+
+                string time = dateTime.ToString("hh:mm tt");
+                Boolean joined = false;
+                foreach(var attendee in activity.Attendees) {
+                    if(attendee.UserId == ViewBag.user.UserId) {
+                        joined = true;
+                    }
+                }
+            
+                TimeSpan activityTS;
+                if(activity.DurationType == "Hours") {
+                    activityTS = TimeSpan.FromHours(activity.Duration);
+                } else if(activity.DurationType == "Days") {
+                    activityTS = TimeSpan.FromDays(activity.Duration);
+                } else {
+                    activityTS = TimeSpan.FromMinutes(activity.Duration);
+                }
+                Boolean conflict = false;
+                foreach(var joinedA in @ViewBag.user.AttendedActivities) {
+                    TimeSpan joinedATS;
+                    if(joinedA.Activity.DurationType == "Hours") {
+                        joinedATS = TimeSpan.FromHours(joinedA.Activity.Duration);
+                    } else if(joinedA.Activity.DurationType == "Days") {
+                        joinedATS = TimeSpan.FromDays(joinedA.Activity.Duration);
+                    } else {
+                        joinedATS = TimeSpan.FromMinutes(joinedA.Activity.Duration);
+                    }
+
+                   if(joinedA.ActivityId != activity.ActivityId) {
+                       if(joinedA.Activity.Date == activity.Date) {
+                           if( joinedA.Activity.Time.Add(joinedATS) > activity.Time.Add(activityTS) ) {
+                            conflict = true;
+                           } else if (joinedA.Activity.Time.Add(joinedATS) > activity.Time ) {
+                            conflict = true;
+                           }
+                       }
+                   }
+                }
+
+                @if(activity.Date > DateTime.Now ) {
+                    <tr>
+                        <th><a href="/activity/@activity.ActivityId">@activity.Title</a></th>
+                        <th>@date &#64; @time</th>
+                        <th>@activity.Duration @activity.DurationType</th>
+                        <th>@activity.Planner.FirstName</th>
+                        <th>@activity.Attendees.Count</th>
+                        @if(@ViewBag.user.UserId == @activity.Planner.UserId) {
+                            <th><a href="/delete/@activity.ActivityId">Delete</a></th>
+                        } else if(joined == false) {
+                            if(@conflict == true) {
+                                <th>Time Conflict</th>
+                            } else {
+                                <th><a href="/join/@activity.ActivityId">Join</a></th>
+                            }
+                            
+                        } else if(joined == true) {
+                            <th><a href="/leave/@activity.ActivityId">leave</a></th>
+                        }  
+                    </tr>  
+                }              
+            }
+
+        </tbody>
+    </table>
+    <a class="btn btn-info" href="/New">Add New Activity</a>
+</div>

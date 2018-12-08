@@ -1,0 +1,25 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+<link rel="stylesheet" href="~/css/index.css">
+@model User
+<h1>Welcome to the Dojo Activity Center</h1>
+<div class="registration container-fluid">
+    <h3>Register here</h3>
+    <form class="form-horizontal" asp-action="Create" asp-controller="Home" method="post">
+        <span asp-validation-for="FirstName" class="red"></span>
+        <input class="form-control" value="" asp-for="FirstName" placeholder="First Name" type="text">
+        <span asp-validation-for="LastName" class="red"></span>
+        <input class="form-control" value="" asp-for="LastName" placeholder="Last Name" type="text">
+        <span asp-validation-for="Email" class="red"></span>
+        <input class="form-control" value="" asp-for="Email" placeholder="ninjaman@gmail.com" type="text">
+        <span asp-validation-for="Password" class="red"></span>
+        <input class="form-control" asp-for="Password" placeholder="password" type="text">
+        <span asp-validation-for="Confirm" class="red"></span>
+        <input class="form-control" name="Confirm" placeholder="confirm password" type="text">
+
+        <button type="submit" class="btn btn-primary">register</button>
+    </form>
+</div>
+
+    @Html.Partial("Login.cshtml")

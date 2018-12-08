@@ -1,0 +1,37 @@
+
+
+form {
+    padding: 1em;
+    margin-left: 2em;
+}
+
+.red {
+    font-size: 10pt;
+    color: red;
+}
+
+
+
+input, label {
+    margin-left: 5em;
+    margin-bottom: 3em;
+}
+
+select {
+    margin-left: 2em;
+}
+
+.row > textarea, .desc {
+    vertical-align: top;
+}
+
+textarea {
+    margin-left: 4em;
+}
+
+button.btn {
+    display: block;
+    width: 125px;
+    margin-left: 47%;
+    margin-top: 1em;
+}

@@ -1,0 +1,18 @@
+
+
+
+nav {
+    display: flex;
+    align-items: flex-end;
+}
+
+
+.home, .name {
+    padding: 0;
+    margin: 0;
+    margin-left: auto;
+}
+
+.logout {
+    margin-left: 4em;
+}

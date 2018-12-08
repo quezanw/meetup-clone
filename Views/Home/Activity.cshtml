@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="~/css/nav.css">
+<link rel="stylesheet" href="~/css/act.css">
+
+<div class="container-fluid">
+    <nav>
+        <h2>Dojo Activity Center</h2>
+        <a class="home" href="/Home">Home</a>
+        <a class="logout" href="/">log out</a>
+    </nav>
+    <hr>
+    <header>
+        <h2>@ViewBag.activity.Title</h2>
+        @{
+            Boolean joined = false;
+            foreach(var attendee in @ViewBag.activity.Attendees) {
+                if(attendee.UserId == ViewBag.user.UserId) {
+                    joined = true;
+                }
+            }
+            @if(@ViewBag.user.UserId == @ViewBag.activity.Planner.UserId) {
+                <a class="btn btn-danger" href="/delete/@ViewBag.activity.ActivityId">Delete</a>
+            } else if(joined == false) {
+                <a class="btn btn-success" href="/join/@ViewBag.activity.ActivityId">Join</a>
+            } else {
+                <a class="btn btn-info" href="/leave/@ViewBag.activity.ActivityId">leave</a>
+            }  
+        }
+    </header>
+    <div class="event-info">
+        <h3 class="planner">Event Coordinator: @ViewBag.activity.Planner.FirstName</h3>
+        <h3>Description:</h3>
+        <p class="act-desc">
+            @ViewBag.activity.Description
+        </p>
+        <h3>Participants:</h3>
+        @foreach (var p in @ViewBag.activity.Attendees)
+        {
+            
+            if(p.UserId != @ViewBag.activity.Planner.UserId) {
+                <p class="person">@p.User.FirstName</p>       
+            } 
+        }
+        
+    </div>
+
+</div>

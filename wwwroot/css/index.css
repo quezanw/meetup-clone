@@ -1,0 +1,50 @@
+body * {
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    padding: 3em;
+}
+
+h1 {
+    margin-bottom: 2em;
+}
+
+.container-fluid {
+    width: 400px;
+    display: inline-block;
+}
+
+div.registration, div.login {
+    display: inline-block;
+    vertical-align: top;
+}
+
+form > input.form-control {
+    margin: 10px 0;
+    height: 30px;
+    font-size: 10pt;
+}
+
+
+div.errors {
+    width: 300px;
+    display:inline-block;
+}
+
+span.red {
+    color: red;
+    font-size: 9pt;
+}
+
+a.back {
+    padding-top: 1em;
+}
+
+h1.success {
+    font-size: 30pt;
+    text-align: center;
+    margin-top: 10em;
+    font-weight: bold;
+}

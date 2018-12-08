@@ -1,0 +1,15 @@
+@model LoginUser
+<link rel="stylesheet" href="~/css/index.css">
+<div class="container-fluid" id="wrapper">
+    <div class="login">
+        <h3>Login Here!</h3>
+        <form asp-action="Login" asp-controller="Home" method="post">
+            <span class="red" asp-validation-for="LoginEmail"></span>
+            <input class="form-control" asp-for="LoginEmail" placeholder="email" type="text">
+            <span class="red" asp-validation-for="LoginPassword"></span>
+            <input class="form-control" asp-for="LoginPassword" placeholder="password" type="text">
+
+            <button type="submit" class="btn btn-danger">login</button>
+        </form>
+    </div>
+</div>

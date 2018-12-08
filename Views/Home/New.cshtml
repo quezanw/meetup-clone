@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="~/css/nav.css">
+<link rel="stylesheet" href="~/css/new.css">
+
+
+
+<div class="container-fluid">
+    <nav>
+        <h2>Dojo Activity Center</h2>
+        <a class="home" href="/Home">Home</a>
+        <a class="logout" href="/">log out</a>
+    </nav>
+    <hr>
+    <h3>Create an Activity</h3>
+    @model Activity
+    <form asp-action="NewActivity" asp-controller="Home" method="post">
+        <input type="hidden" asp-for="UserId" value="@ViewBag.user.UserId">
+        <div class="row">
+            <span class="red" asp-validation-for="Title"></span>
+            <label asp-for="Title">Title: </label>
+            <input asp-for="Title" >
+            <span class="red" asp-validation-for="Time"></span>
+            <label asp-for="Time">Time: </label>
+            <input asp-for="Time" type="time" class="col">
+        </div>
+        <div class="row">
+            <span class="red" asp-validation-for="Date"></span>
+            <label asp-for="Date">Date: </label>
+            <input asp-for="Date" type="date">
+            <span class="red" asp-validation-for="Time"></span>
+            <label asp-for="Duration">Duration: </label>
+            <input asp-for="Duration" type="number" class="col">
+            <select asp-for="DurationType">
+                <option value="Hours">Hours</option>
+                <option value="Minutes">Minutes</option>
+                <option value="Days">Days</option>
+            </select>
+        </div>
+        <div class="row">
+            <span class="red" asp-validation-for="Description"></span>
+            <label class="desc" asp-for="Description">Description: </label>
+            <textarea asp-for="Description" cols="50" rows="10"></textarea>
+            <button class="btn btn-success" type="submit">Create Activity</button>
+        </div>
+
+    </form>
+</div>
